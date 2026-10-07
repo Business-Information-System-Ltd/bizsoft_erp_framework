@@ -1,0 +1,9 @@
+
+{% extends "erp_organization/base.html" %}
+{% block content %}
+<h1>Branches</h1><div class="sub">Operating responsibility under a legal entity.</div>
+<div class="grid">
+<section class="panel"><h2>Entry</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Branch</button></form></section>
+<section><h2>List</h2><table><tr><th>Code</th><th>Name</th><th>Legal Entity</th><th>Region</th><th>Zone</th><th>HO</th><th>Bank</th><th>Active</th></tr>{% for item in items %}<tr><td>{{ item.branch_code }}</td><td>{{ item.branch_name }}</td><td>{{ item.legal_entity.unit_code }}</td><td>{{ item.region_code|default:"-" }}</td><td>{{ item.zone_code|default:"-" }}</td><td>{{ item.is_head_office }}</td><td>{{ item.is_bank_branch }}</td><td>{{ item.is_active }}</td></tr>{% empty %}<tr><td colspan="8">No branches yet.</td></tr>{% endfor %}</table></section>
+</div>
+{% endblock %}

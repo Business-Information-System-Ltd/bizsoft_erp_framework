@@ -1,0 +1,33 @@
+from .asset_core_views import (
+    AssetListCreateView,
+    AssetDetailView,
+    AssetValidateView,
+    AssetCapitalizeView,
+    BulkValidateView,
+    BulkCapitalizeView,
+    BulkDeleteView,
+    BulkApprovalPdfView,
+    AssetApprovalPdfView,
+    AssetApprovalActionView,
+    AssetDocumentListCreateView,
+    AssetExportView,
+    AssetImportView,
+    WipTransferView,
+)
+
+__all__ = [
+    "AssetListCreateView",
+    "AssetDetailView",
+    "AssetValidateView",
+    "AssetCapitalizeView",
+    "BulkValidateView",
+    "BulkCapitalizeView",
+    "BulkDeleteView",
+    "BulkApprovalPdfView",
+    "AssetApprovalPdfView",
+    "AssetApprovalActionView",
+    "AssetDocumentListCreateView",
+    "AssetExportView",
+    "AssetImportView",
+    "WipTransferView",
+]

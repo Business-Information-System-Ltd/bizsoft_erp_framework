@@ -1,0 +1,9 @@
+
+{% extends "erp_organization/base.html" %}
+{% block content %}
+<h1>Legal Entities</h1><div class="sub">Legal ownership records such as companies and banks.</div>
+<div class="grid">
+<section class="panel"><h2>Entry</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Legal Entity</button></form></section>
+<section><h2>List</h2><table><tr><th>Code</th><th>Name</th><th>Country</th><th>Functional Currency</th><th>Active</th></tr>{% for item in items %}<tr><td>{{ item.legal_entity_code }}</td><td>{{ item.legal_entity_name }}</td><td>{{ item.country_code }}</td><td>{{ item.functional_currency_code }}</td><td>{{ item.is_active }}</td></tr>{% empty %}<tr><td colspan="5">No legal entities yet.</td></tr>{% endfor %}</table></section>
+</div>
+{% endblock %}

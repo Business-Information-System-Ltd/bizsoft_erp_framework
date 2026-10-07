@@ -1,0 +1,9 @@
+
+{% extends "erp_organization/base.html" %}
+{% block content %}
+<h1>Departments</h1><div class="sub">Functional responsibility, optionally under a branch or parent department.</div>
+<div class="grid">
+<section class="panel"><h2>Entry</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Department</button></form></section>
+<section><h2>List</h2><table><tr><th>Code</th><th>Name</th><th>Legal Entity</th><th>Branch</th><th>Parent Department</th><th>Active</th></tr>{% for item in items %}<tr><td>{{ item.department_code }}</td><td>{{ item.department_name }}</td><td>{{ item.legal_entity.unit_code }}</td><td>{{ item.branch.unit_code|default:"-" }}</td><td>{{ item.parent_department.unit_code|default:"-" }}</td><td>{{ item.is_active }}</td></tr>{% empty %}<tr><td colspan="6">No departments yet.</td></tr>{% endfor %}</table></section>
+</div>
+{% endblock %}

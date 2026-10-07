@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ERP Organization{% endblock %}</title>
+  <style>
+    :root { --ink:#18212f; --muted:#667085; --line:#d9dee8; --bg:#f6f8fb; --panel:#ffffff; --accent:#1f7a8c; --accent2:#5b6b3a; --danger:#a33a3a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:var(--bg); }
+    .shell { display:grid; grid-template-columns: 240px 1fr; min-height:100vh; }
+    aside { background:#1f2937; color:white; padding:20px 16px; }
+    .brand { font-size:18px; font-weight:700; margin-bottom:20px; }
+    nav a { display:block; color:#e5e7eb; text-decoration:none; padding:10px 8px; border-radius:6px; margin-bottom:4px; font-size:14px; }
+    nav a:hover { background:#374151; }
+    main { padding:24px; }
+    h1 { margin:0 0 6px; font-size:26px; }
+    h2 { margin:0 0 14px; font-size:18px; }
+    .sub { color:var(--muted); margin-bottom:20px; }
+    .cards { display:grid; grid-template-columns: repeat(5, minmax(120px,1fr)); gap:12px; margin-bottom:20px; }
+    .card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .metric { font-size:26px; font-weight:700; }
+    .label { color:var(--muted); font-size:13px; margin-top:4px; }
+    .grid { display:grid; grid-template-columns: 360px 1fr; gap:18px; align-items:start; }
+    table { width:100%; border-collapse:collapse; background:white; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+    th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
+    th { background:#eef2f7; color:#344054; font-weight:700; }
+    tr:last-child td { border-bottom:0; }
+    form p { margin:0 0 12px; }
+    label { display:block; font-size:13px; font-weight:700; margin-bottom:4px; }
+    input, select, textarea { width:100%; border:1px solid #cbd5e1; border-radius:6px; padding:8px; font:inherit; background:white; }
+    input[type="checkbox"] { width:auto; }
+    button, .button { display:inline-block; border:0; background:var(--accent); color:white; padding:9px 13px; border-radius:6px; font-weight:700; cursor:pointer; text-decoration:none; }
+    .button.secondary { background:#4b5563; }
+    .messages { margin:0 0 16px; padding:0; list-style:none; }
+    .messages li { background:#e7f5ed; border:1px solid #b7dfc5; padding:10px; border-radius:6px; margin-bottom:8px; }
+    .tree ul { margin:6px 0 6px 20px; padding:0; }
+    .tree li { margin:6px 0; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:99px; background:#e8eef4; font-size:12px; color:#344054; }
+    .toolbar { display:flex; gap:10px; align-items:center; margin-bottom:14px; flex-wrap:wrap; }
+    @media (max-width: 900px) { .shell { grid-template-columns:1fr; } aside { position:static; } .cards,.grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand">BizSoft ERP</div>
+    <nav>
+      <a href="{% url 'erp-org-ui-dashboard' %}">Dashboard</a>
+      <a href="{% url 'erp-org-ui-units' %}">Organization Units</a>
+      <a href="{% url 'erp-org-ui-legal-entities' %}">Legal Entities</a>
+      <a href="{% url 'erp-org-ui-branches' %}">Branches</a>
+      <a href="{% url 'erp-org-ui-departments' %}">Departments</a>
+      <a href="{% url 'erp-org-ui-locations' %}">Physical Locations</a>
+      <a href="/api/erp-organization/organization/tree/">Tree API</a>
+    </nav>
+  </aside>
+  <main>
+    {% if messages %}<ul class="messages">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+</body>
+</html>

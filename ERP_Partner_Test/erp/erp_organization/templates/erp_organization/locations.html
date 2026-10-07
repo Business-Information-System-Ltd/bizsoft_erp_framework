@@ -1,0 +1,9 @@
+
+{% extends "erp_organization/base.html" %}
+{% block content %}
+<h1>Physical Locations</h1><div class="sub">Where assets or inventory physically exist.</div>
+<div class="grid">
+<section class="panel"><h2>Entry</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Location</button></form></section>
+<section><h2>List</h2><table><tr><th>Code</th><th>Name</th><th>Type</th><th>Responsible Branch</th><th>Responsible Dept</th><th>Internal</th><th>Asset</th><th>Active</th></tr>{% for item in items %}<tr><td>{{ item.location_code }}</td><td>{{ item.location_name }}</td><td>{{ item.location_type }}</td><td>{{ item.responsible_branch.unit_code|default:"-" }}</td><td>{{ item.responsible_department.unit_code|default:"-" }}</td><td>{{ item.is_internal }}</td><td>{{ item.is_asset_assignable }}</td><td>{{ item.is_active }}</td></tr>{% empty %}<tr><td colspan="8">No physical locations yet.</td></tr>{% endfor %}</table></section>
+</div>
+{% endblock %}

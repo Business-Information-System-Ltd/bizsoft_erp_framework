@@ -1,0 +1,22 @@
+
+{% extends "erp_organization/base.html" %}
+{% block title %}Organization Dashboard{% endblock %}
+{% block content %}
+<h1>ERP Organization</h1>
+<div class="sub">Sample server-rendered UI for organization foundation data.</div>
+<div class="toolbar">
+  <form method="post" action="{% url 'erp-org-ui-seed-bank' %}">{% csrf_token %}<button type="submit">Create Sample Bank Data</button></form>
+  <a class="button secondary" href="{% url 'erp-org-ui-branches' %}">Create Branch</a>
+</div>
+<div class="cards">
+  <div class="card"><div class="metric">{{ counts.legal_entities }}</div><div class="label">Legal Entities</div></div>
+  <div class="card"><div class="metric">{{ counts.branches }}</div><div class="label">Branches</div></div>
+  <div class="card"><div class="metric">{{ counts.departments }}</div><div class="label">Departments</div></div>
+  <div class="card"><div class="metric">{{ counts.locations }}</div><div class="label">Physical Locations</div></div>
+  <div class="card"><div class="metric">{{ counts.inactive_units }}</div><div class="label">Inactive Units</div></div>
+</div>
+<div class="grid">
+  <section class="panel tree"><h2>Organization Tree</h2>{% include "erp_organization/_tree.html" with nodes=tree %}</section>
+  <section><h2>Recent Units</h2><table><tr><th>Code</th><th>Name</th><th>Type</th><th>Active</th></tr>{% for unit in recent_units %}<tr><td>{{ unit.unit_code }}</td><td>{{ unit.unit_name }}</td><td>{{ unit.unit_type }}</td><td>{{ unit.is_active }}</td></tr>{% empty %}<tr><td colspan="4">No data yet.</td></tr>{% endfor %}</table></section>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+
+<ul>
+{% for node in nodes %}
+  <li><strong>{{ node.code }}</strong> - {{ node.name }} <span class="pill">{{ node.type }}</span>
+    {% if node.children %}{% include "erp_organization/_tree.html" with nodes=node.children %}{% endif %}
+  </li>
+{% empty %}
+  <li>No hierarchy data yet.</li>
+{% endfor %}
+</ul>

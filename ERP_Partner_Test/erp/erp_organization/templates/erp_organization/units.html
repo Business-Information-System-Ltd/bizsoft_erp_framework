@@ -1,0 +1,7 @@
+
+{% extends "erp_organization/base.html" %}
+{% block content %}
+<h1>Organization Units</h1><div class="sub">Common registry for all organization structure records.</div>
+<form class="toolbar" method="get"><select name="unit_type"><option value="">All unit types</option>{% for value,label in unit_types %}<option value="{{ value }}" {% if unit_type == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select><button type="submit">Filter</button></form>
+<table><tr><th>Code</th><th>Name</th><th>Type</th><th>Legal Entity</th><th>Parent</th><th>Flags</th><th>Active</th></tr>{% for unit in units %}<tr><td>{{ unit.unit_code }}</td><td>{{ unit.unit_name }}</td><td>{{ unit.unit_type }}</td><td>{{ unit.legal_entity|default:"-" }}</td><td>{{ unit.parent_unit|default:"-" }}</td><td>{% if unit.is_cost_center %}Cost {% endif %}{% if unit.is_profit_center %}Profit {% endif %}{% if unit.is_inventory_storable %}Inventory {% endif %}{% if unit.is_asset_assignable %}Asset{% endif %}</td><td>{{ unit.is_active }}</td></tr>{% empty %}<tr><td colspan="7">No units found.</td></tr>{% endfor %}</table>
+{% endblock %}
